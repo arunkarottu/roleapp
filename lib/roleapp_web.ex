@@ -26,10 +26,11 @@ defmodule RoleappWeb do
     end
   end
 
-  def view do
+  def view(opts \\
+    [root: "lib/roleapp_web/templates",
+      namespace: RoleappWeb]) do
     quote do
-      use Phoenix.View, root: "lib/roleapp_web/templates",
-                        namespace: RoleappWeb
+      use Phoenix.View, unquote(opts)
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -40,6 +41,7 @@ defmodule RoleappWeb do
       import RoleappWeb.Router.Helpers
       import RoleappWeb.ErrorHelpers
       import RoleappWeb.Gettext
+      import RoleappWeb.Components.RestrictByRole.Helpers
     end
   end
 
@@ -63,5 +65,8 @@ defmodule RoleappWeb do
   """
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
+  end
+  defmacro __using__({which, opts}) when is_atom(which) do
+    apply(__MODULE__, which, [opts])
   end
 end

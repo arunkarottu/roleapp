@@ -1,0 +1,7 @@
+<div class="login-outer">
+  <div class="login-inner">
+    <h2>Login</h2>
+
+    <%= render "form.html", conn: @conn, action: session_path(@conn, :create) %>
+  </div>
+</div>

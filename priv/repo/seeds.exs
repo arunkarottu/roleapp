@@ -1,11 +1,3 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Roleapp.Repo.insert!(%Roleapp.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+Ecto.Adapters.SQL.query!(Roleapp.Repo, "TRUNCATE TABLE users CASCADE")
+Roleapp.Repo.insert!(Roleapp.User.create_changeset(%Roleapp.User{}, %{email: "admin@example.com", password: "password", role: "admin"}))
+Roleapp.Repo.insert!(Roleapp.User.create_changeset(%Roleapp.User{}, %{email: "operator@example.com", password: "password", role: "operator"}))

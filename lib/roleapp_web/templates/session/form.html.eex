@@ -1,0 +1,13 @@
+<%= form_for @conn, @action, [as: :session], fn form -> %>
+  <div class="login-input">
+    <%= label form, :email, "Email"%>
+    <%= email_input form, :email, autofocus: true %>
+  </div>
+
+  <div class="login-input">
+    <%= label form, :password, "Password" %>
+    <%= password_input form, :password %>
+  </div>
+
+  <%= submit "Login", class: "login-button" %>
+<% end %>
